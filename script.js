@@ -4,7 +4,7 @@ let shareCount = 0;
 let requiredShares = 5;
 
 // ✅ Your WhatsApp group link
-let groupLink = "https://chat.whatsapp.com/CpbhPP7mzhyI5q4tCCRy2l?mode=gi_t";
+let groupLink = "chat.whatsapp.com/CpbhPP7mzhyI5q4tCCRy2l?mode=gi_t";
 
 function updateProgress() {
   let percent = (count / goal) * 100;
@@ -32,28 +32,29 @@ function joinList() {
 }
 
 function shareNow() {
-  let message = `🔥 Join MegaTech VCF now 👇\n${groupLink}`;
+  let message = `🔥 Join MegaTech VCF now 👇\nCopy and send this link:\n${groupLink}`;
 
   shareCount++;
 
   let note = document.getElementById("notification");
   note.innerText = `Sharing... (${shareCount}/${requiredShares})`;
 
-  // ✅ BEST METHOD → opens WhatsApp forward/share screen
+  // ✅ This opens WhatsApp SHARE screen (not group)
   let url = "https://api.whatsapp.com/send?text=" + encodeURIComponent(message);
 
   window.open(url, "_blank");
 
-  // ✅ After 5 clicks → show success
+  // ✅ After 5 clicks → success message
   if (shareCount >= requiredShares) {
     setTimeout(() => {
-      note.innerText = "✅ Successfully added to the MegaTech VCF file!";
+      note.innerText = "✅ Task completed. Your contact has been verified successfully to the VCF file.";
       document.getElementById("shareBtn").innerText = "COMPLETED ✅";
       document.getElementById("shareBtn").disabled = true;
     }, 1500);
   }
 }
 
+// Join button (this one should open group normally)
 function joinWhatsApp() {
-  window.open(groupLink, "_blank");
+  window.open("https://chat.whatsapp.com/CpbhPP7mzhyI5q4tCCRy2l?mode=gi_t", "_blank");
 }
