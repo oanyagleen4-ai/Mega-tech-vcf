@@ -1,4 +1,4 @@
-let count = 0;
+let count = 237;
 let goal = 700;
 
 function updateProgress() {
