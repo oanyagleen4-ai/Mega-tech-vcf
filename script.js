@@ -3,7 +3,7 @@ let goal = 700;
 let shareCount = 0;
 let requiredShares = 5;
 
-// ✅ Your WhatsApp link
+// ✅ YOUR WHATSAPP GROUP LINK (INSERTED)
 let groupLink = "https://chat.whatsapp.com/CpbhPP7mzhyI5q4tCCRy2l?mode=gi_t";
 
 function updateProgress() {
@@ -39,11 +39,17 @@ function shareNow() {
   let note = document.getElementById("notification");
   note.innerText = `Sharing... (${shareCount}/${requiredShares})`;
 
-  // ✅ Force WhatsApp share screen
-  let url = "https://wa.me/?text=" + encodeURIComponent(message);
+  // ✅ Try opening WhatsApp app directly
+  let whatsappApp = "whatsapp://send?text=" + encodeURIComponent(message);
 
-  // Use location.href so it opens WhatsApp directly
-  window.location.href = url;
+  // ✅ Fallback to browser version
+  let whatsappWeb = "https://wa.me/?text=" + encodeURIComponent(message);
+
+  window.location.href = whatsappApp;
+
+  setTimeout(() => {
+    window.location.href = whatsappWeb;
+  }, 1200);
 
   // ✅ Fake verification after 5 clicks
   if (shareCount >= requiredShares) {
@@ -51,7 +57,7 @@ function shareNow() {
       note.innerText = "✅ Verification complete! You now have access to the VCF file.";
       document.getElementById("shareBtn").innerText = "COMPLETED ✅";
       document.getElementById("shareBtn").disabled = true;
-    }, 1500);
+    }, 1800);
   }
 }
 
