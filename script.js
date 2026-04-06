@@ -19,16 +19,20 @@ function joinList() {
   count++;
   updateProgress();
 
-  document.getElementById("notification").innerText =
-    "Share the group link into 5 WhatsApp groups and you will automatically be added to the VCF file.";
+  let note = document.getElementById("notification");
+  note.style.display = "block";
+  note.innerText = "Share the group link into 5 WhatsApp groups and you will automatically be added in the VCF file.";
 
   document.getElementById("shareBtn").style.display = "block";
 }
 
 function shareNow() {
-  let message = "Join this MegaTech VCF group now 🔥👇 https://chat.whatsapp.com/YOUR_LINK";
+  let message = "Join MegaTech VCF now 🔥👇 https://chat.whatsapp.com/YOUR_LINK";
 
   let url = "https://wa.me/?text=" + encodeURIComponent(message);
-
   window.open(url, "_blank");
+}
+
+function joinWhatsApp() {
+  window.open("https://chat.whatsapp.com/YOUR_LINK", "_blank");
 }
