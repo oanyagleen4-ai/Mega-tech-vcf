@@ -3,7 +3,7 @@ let goal = 700;
 let shareCount = 0;
 let requiredShares = 5;
 
-// ✅ YOUR WHATSAPP GROUP LINK (INSERTED)
+// ✅ Your WhatsApp group link
 let groupLink = "https://chat.whatsapp.com/CpbhPP7mzhyI5q4tCCRy2l?mode=gi_t";
 
 function updateProgress() {
@@ -26,7 +26,7 @@ function joinList() {
 
   let note = document.getElementById("notification");
   note.style.display = "block";
-  note.innerText = "Share the group link to 5 WhatsApp groups to unlock access.";
+  note.innerText = "Share this link to 5 WhatsApp chats or status to unlock access.";
 
   document.getElementById("shareBtn").style.display = "block";
 }
@@ -39,28 +39,21 @@ function shareNow() {
   let note = document.getElementById("notification");
   note.innerText = `Sharing... (${shareCount}/${requiredShares})`;
 
-  // ✅ Try opening WhatsApp app directly
-  let whatsappApp = "whatsapp://send?text=" + encodeURIComponent(message);
+  // ✅ BEST METHOD → opens WhatsApp forward/share screen
+  let url = "https://api.whatsapp.com/send?text=" + encodeURIComponent(message);
 
-  // ✅ Fallback to browser version
-  let whatsappWeb = "https://wa.me/?text=" + encodeURIComponent(message);
+  window.open(url, "_blank");
 
-  window.location.href = whatsappApp;
-
-  setTimeout(() => {
-    window.location.href = whatsappWeb;
-  }, 1200);
-
-  // ✅ Fake verification after 5 clicks
+  // ✅ After 5 clicks → show success
   if (shareCount >= requiredShares) {
     setTimeout(() => {
-      note.innerText = "✅ Verification complete! You now have access to the VCF file.";
+      note.innerText = "✅ Successfully added to the MegaTech VCF file!";
       document.getElementById("shareBtn").innerText = "COMPLETED ✅";
       document.getElementById("shareBtn").disabled = true;
-    }, 1800);
+    }, 1500);
   }
 }
 
 function joinWhatsApp() {
-  window.location.href = groupLink;
+  window.open(groupLink, "_blank");
 }
