@@ -3,7 +3,7 @@ let goal = 700;
 let shareCount = 0;
 let requiredShares = 5;
 
-// ✅ YOUR REAL WHATSAPP LINK (INSERTED)
+// ✅ Your WhatsApp link
 let groupLink = "https://chat.whatsapp.com/CpbhPP7mzhyI5q4tCCRy2l?mode=gi_t";
 
 function updateProgress() {
@@ -34,40 +34,27 @@ function joinList() {
 function shareNow() {
   let message = `🔥 Join MegaTech VCF now 👇\n${groupLink}`;
 
-  // Increase count
   shareCount++;
 
   let note = document.getElementById("notification");
   note.innerText = `Sharing... (${shareCount}/${requiredShares})`;
 
-  // ✅ BEST METHOD (native share)
-  if (navigator.share) {
-    navigator.share({
-      text: message
-    }).catch(() => {
-      openWhatsApp(message);
-    });
-  } else {
-    openWhatsApp(message);
-  }
+  // ✅ Force WhatsApp share screen
+  let url = "https://wa.me/?text=" + encodeURIComponent(message);
 
-  // ✅ After 5 clicks (simulation like real sites)
+  // Use location.href so it opens WhatsApp directly
+  window.location.href = url;
+
+  // ✅ Fake verification after 5 clicks
   if (shareCount >= requiredShares) {
     setTimeout(() => {
       note.innerText = "✅ Verification complete! You now have access to the VCF file.";
       document.getElementById("shareBtn").innerText = "COMPLETED ✅";
       document.getElementById("shareBtn").disabled = true;
-    }, 1000);
+    }, 1500);
   }
 }
 
-// Opens WhatsApp directly
-function openWhatsApp(message) {
-  let url = "https://wa.me/?text=" + encodeURIComponent(message);
-  window.open(url, "_blank");
-}
-
-// Join button
 function joinWhatsApp() {
-  window.open(groupLink, "_blank");
+  window.location.href = groupLink;
 }
