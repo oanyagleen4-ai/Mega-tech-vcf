@@ -1,1 +1,81 @@
+body {
+  background: #0b0f14;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+}
 
+.container {
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.badge {
+  background: #0f2f1f;
+  padding: 10px;
+  border-radius: 20px;
+  color: #00ff88;
+}
+
+h1 {
+  font-size: 32px;
+  margin: 10px 0;
+}
+
+.sub {
+  color: #00ff88;
+  letter-spacing: 2px;
+}
+
+.info span {
+  color: #00ff88;
+  font-weight: bold;
+}
+
+.progress-container {
+  background: #222;
+  border-radius: 20px;
+  margin: 20px 0;
+}
+
+.progress-bar {
+  height: 10px;
+  width: 0%;
+  background: #00ff88;
+  border-radius: 20px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #00c853;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+#notification {
+  margin-top: 15px;
+  color: #00ff88;
+  font-weight: bold;
+}
+
+#shareBtn {
+  display: none;
+  background: #00ff88;
+  color: black;
+  }
