@@ -1,7 +1,7 @@
 // ✅ SETTINGS
 let goal = 1600;
-let increment = 10;
-let intervalHours = 5;
+let increment = 50;
+let intervalHours = 2;
 
 // ✅ LOAD SAVED DATA OR DEFAULT
 let savedCount = localStorage.getItem("count");
