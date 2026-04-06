@@ -7,7 +7,7 @@ let intervalHours = 2;
 let savedCount = localStorage.getItem("count");
 let lastUpdate = localStorage.getItem("lastUpdate");
 
-let count = savedCount ? parseInt(savedCount) : 788;
+let count = savedCount ? parseInt(savedCount) : 1087;
 let lastTime = lastUpdate ? parseInt(lastUpdate) : Date.now();
 
 // ✅ AUTO INCREMENT FUNCTION
