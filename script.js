@@ -1,16 +1,58 @@
-let count = 0;
-let goal = 700;
-let shareCount = 0;
-let requiredShares = 5;
+let goal = 1600;
 
-// 👉 PUT YOUR REAL WHATSAPP LINK HERE
-let groupLink = "https://chat.whatsapp.com/YOUR_REAL_LINK";
+// ✅ Starting value
+let baseCount = 1402;
 
+// Save first visit time
+let startTime = localStorage.getItem("startTime");
+
+if (!startTime) {
+  startTime = new Date().getTime();
+  localStorage.setItem("startTime", startTime);
+} else {
+  startTime = parseInt(startTime);
+}
+
+// Calculate how many hours passed
+function getCurrentCount() {
+  let now = new Date().getTime();
+  let hoursPassed = Math.floor((now - startTime) / (1000 * 60 * 60));
+
+  let increase = hoursPassed * 20;
+
+  let current = baseCount + increase;
+
+  if (current > goal) current = goal;
+
+  return current;
+}
+
+// Update UI
 function updateProgress() {
+  let count = getCurrentCount();
+
   let percent = (count / goal) * 100;
+
   document.getElementById("progressBar").style.width = percent + "%";
   document.getElementById("count").innerText = count + " registered / " + goal + " goal";
 }
+
+// Run immediately
+updateProgress();
+
+// Update every 5 seconds (for live feel)
+setInterval(updateProgress, 5000);
+
+
+
+// ==========================
+// YOUR EXISTING FUNCTIONS
+// ==========================
+
+let shareCount = 0;
+let requiredShares = 5;
+
+let groupLink = "https://chat.whatsapp.com/CpbhPP7mzhyI5q4tCCRy2l";
 
 function joinList() {
   let name = document.getElementById("name").value;
@@ -21,50 +63,33 @@ function joinList() {
     return;
   }
 
-  count++;
-  updateProgress();
-
   let note = document.getElementById("notification");
   note.style.display = "block";
-  note.innerText = `Share the group link to ${requiredShares} WhatsApp groups to unlock access.`;
+  note.innerText = "Share to 5 WhatsApp groups or status to continue.";
 
   document.getElementById("shareBtn").style.display = "block";
 }
 
 function shareNow() {
-  let message = `🔥 Join MegaTech VCF now 👇\n${groupLink}`;
+  let message = "🔥 Join MegaTech VCF now 👇\n\n" + groupLink;
 
-  // Increase share count
   shareCount++;
 
-  // Update notification
   let note = document.getElementById("notification");
-  note.innerText = `Sharing... (${shareCount}/${requiredShares})`;
+  note.innerText = `Sharing... (${shareCount}/5)`;
 
-  // Native share (best UX)
   if (navigator.share) {
-    navigator.share({
-      text: message
-    }).catch(() => {
-      fallbackShare(message);
-    });
+    navigator.share({ text: message }).catch(() => {});
   } else {
-    fallbackShare(message);
+    window.open("https://wa.me/?text=" + encodeURIComponent(message), "_blank");
   }
 
-  // After required shares
   if (shareCount >= requiredShares) {
     setTimeout(() => {
-      note.innerText = "✅ Verification complete! You will be added to the VCF file.";
+      note.innerText = "✅ Task completed. Your contact has been verified successfully to the VCF file.";
       document.getElementById("shareBtn").innerText = "COMPLETED ✅";
-      document.getElementById("shareBtn").disabled = true;
-    }, 1000);
+    }, 1500);
   }
-}
-
-function fallbackShare(message) {
-  let url = "https://wa.me/?text=" + encodeURIComponent(message);
-  window.open(url, "_blank");
 }
 
 function joinWhatsApp() {
